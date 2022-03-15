@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Anchor_Editor_Backend.Repository;
+using Anchor_Editor_Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +29,17 @@ namespace Anchor_Editor_Backend
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(setupAction => { setupAction.ReturnHttpNotAcceptable = true; })
+                .AddXmlSerializerFormatters();
+            //    .AddXmlDataContractSerializerFormatters()
+            //    .AddXmlDataContractSerializerFormatters(); //Request Header: allow using XMLs
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Anchor_Editor_Backend", Version = "v1" });
             });
+
+            services.AddSingleton<IXmlRepository, XmlRepository>();
+            services.AddTransient<IXmlDeserializationService, XmlDeserializationService>();
 
         }
 
