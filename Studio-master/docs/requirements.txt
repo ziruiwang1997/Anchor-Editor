@@ -1,0 +1,6 @@
+Sphinx
+guzzle_sphinx_theme
+sphinx-click
+sphinxcontrib-programoutput
+-r ../requirements.txt
+readalongs

@@ -25,3 +25,4 @@ C:\Users\zirui\Desktop\Anchor-Editor\Anchor-Editor-Backend\Anchor-Editor-Backend
 C:\Users\zirui\Desktop\Anchor-Editor\Anchor-Editor-Backend\Anchor-Editor-Backend\obj\Debug\net5.0\ref\Anchor-Editor-Backend.dll
 C:\Users\zirui\Desktop\Anchor-Editor\Anchor-Editor-Backend\Anchor-Editor-Backend\obj\Debug\net5.0\Anchor-Editor-Backend.pdb
 C:\Users\zirui\Desktop\Anchor-Editor\Anchor-Editor-Backend\Anchor-Editor-Backend\obj\Debug\net5.0\Anchor-Editor-Backend.genruntimeconfig.cache
+C:\Users\zirui\Desktop\Anchor-Editor\Anchor-Editor-Backend\Anchor-Editor-Backend\obj\Debug\net5.0\Anchor-Editor-Backend.csproj.AssemblyReference.cache

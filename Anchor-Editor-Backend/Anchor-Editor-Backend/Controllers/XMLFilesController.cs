@@ -17,19 +17,28 @@ namespace Anchor_Editor_Backend.Controllers
     [ApiController]
     public class XMLFilesController : ControllerBase
     {
-        private IXmlRepository _textRepository;
+        private IXmlRepository _xmlRepository;
+
         private IXmlDeserializationService _xmlDeserializationService;
-        public XMLFilesController(IXmlRepository textRepository, IXmlDeserializationService xmlDeserializationService)
+        public XMLFilesController(IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
         {
-            _textRepository = textRepository;
+            _xmlRepository = xmlRepository;
             _xmlDeserializationService = xmlDeserializationService;
         }
 
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {
-            _textRepository.uploadXMLFile(request);
-            var plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(request);
+            _xmlRepository.uploadXMLFile(request);
+            
+            return Ok("XML Uploaded");
+        }
+
+        [HttpGet]
+        public IActionResult GetPlainText()
+        {
+            var originalXmlFile = _xmlRepository.OriginalXmlFile;
+            string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
             return Ok(plainText);
         }
     }
