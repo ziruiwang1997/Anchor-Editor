@@ -16,10 +16,12 @@ namespace Anchor_Editor_Backend.Controllers
     public class AnchorsController : ControllerBase
     {
         private IXmlRepository _xmlRepository;
+        private IAnchorRepository _anchorRepository;
         private IXmlDeserializationService _xmlDeserializationService;
 
-        public AnchorsController(IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
+        public AnchorsController(IAnchorRepository anchorRepository, IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
         {
+            _anchorRepository = anchorRepository;
             _xmlRepository = xmlRepository;
             _xmlDeserializationService = xmlDeserializationService;
         }
@@ -27,9 +29,43 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpGet]
         public IActionResult GetAllAnchors()
         {
-            var originalXmlFile = _xmlRepository.OriginalXmlFile;
-            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(originalXmlFile);
-            return Ok(anchorList);
+            
+            return Ok(_anchorRepository.AnchorList);
+        }
+
+        [HttpGet("{timestamp}")]
+        public IActionResult GetAnchorsByTimestamp(string timestamp)
+        {
+            Anchor anchor = _anchorRepository.GetAnchorByTimestamp(timestamp);
+            return Ok(anchor);
+        }
+
+        [HttpGet("{location:int}")]
+        public IActionResult GetAnchorsByTimestamp(int location)
+        {
+            IList <Anchor> anchors = _anchorRepository.GetAnchorByLocation(location);
+            return Ok(anchors);
+        }
+
+        [HttpDelete("{timestamp}")]
+        public IActionResult DeleteAnchorByTimestamp(string timestamp)
+        {
+            _anchorRepository.DeleteAnchorByTimestamp(timestamp);
+            return Ok($"Anchor at {timestamp} deleted");
+        }
+
+        [HttpPost]
+        public IActionResult AddAnchorByTimestamp([FromQuery] string timestamp, [FromQuery] int location)
+        {
+            _anchorRepository.AddAnchorByTimestamp(timestamp, location);
+            return Ok($"Anchor at timestamp = {timestamp}, location = {location} Added");
+        }
+
+        [HttpPut]
+        public IActionResult EditAnchor([FromQuery] string originalTimestamp, [FromQuery] int originalLocation, [FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
+        {
+            _anchorRepository.EditAnchor(originalTimestamp, originalLocation, destinationTimestamp, destinationLocation);
+            return Ok($"Anchor updated to timestamp = {destinationTimestamp}, location = {originalLocation}");
         }
     }
 }

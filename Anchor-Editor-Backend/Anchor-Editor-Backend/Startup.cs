@@ -39,8 +39,9 @@ namespace Anchor_Editor_Backend
             });
 
             services.AddSingleton<IXmlRepository, XmlRepository>();
+            services.AddSingleton<IAnchorRepository, AnchorRepository>();
             services.AddTransient<IXmlDeserializationService, XmlDeserializationService>();
-
+            services.AddTransient<IXmlSerializationService, XmlSerializationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

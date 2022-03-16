@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Anchor_Editor_Backend.Repository;
 using Anchor_Editor_Backend.Services;
+using Anchor_Editor_Backend.Models;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -20,8 +21,12 @@ namespace Anchor_Editor_Backend.Controllers
         private IXmlRepository _xmlRepository;
 
         private IXmlDeserializationService _xmlDeserializationService;
-        public XMLFilesController(IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
+
+        private IAnchorRepository _anchorRepository;
+
+        public XMLFilesController(IAnchorRepository anchorRepository, IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
         {
+            _anchorRepository = anchorRepository;
             _xmlRepository = xmlRepository;
             _xmlDeserializationService = xmlDeserializationService;
         }
@@ -29,17 +34,22 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {
-            _xmlRepository.uploadXMLFile(request);
-            
+            _xmlRepository.OriginalXmlFile = request;
+
+            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(_xmlRepository.OriginalXmlFile);
+
+            _anchorRepository.AnchorList = anchorList;
+
             return Ok("XML Uploaded");
         }
 
         [HttpGet]
-        public IActionResult GetPlainText()
+        public IActionResult GetXmlFile()
         {
-            var originalXmlFile = _xmlRepository.OriginalXmlFile;
-            string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
-            return Ok(plainText);
+
+            return Ok("Default XML");
         }
+
+        
     }
 }
