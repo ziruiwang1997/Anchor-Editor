@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
+using Anchor_Editor_Backend.Services;
+using Anchor_Editor_Backend.Repository;
+using Anchor_Editor_Backend.Models;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -12,16 +15,21 @@ namespace Anchor_Editor_Backend.Controllers
     [ApiController]
     public class AnchorsController : ControllerBase
     {
-        public AnchorsController()
-        {
+        private IXmlRepository _xmlRepository;
+        private IXmlDeserializationService _xmlDeserializationService;
 
+        public AnchorsController(IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
+        {
+            _xmlRepository = xmlRepository;
+            _xmlDeserializationService = xmlDeserializationService;
         }
 
         [HttpGet]
-        public IActionResult GetPlainTextAsString()
+        public IActionResult GetAllAnchors()
         {
-            string plainText = "DEFAULT STRING";
-            return Ok(plainText);
+            var originalXmlFile = _xmlRepository.OriginalXmlFile;
+            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(originalXmlFile);
+            return Ok(anchorList);
         }
     }
 }
