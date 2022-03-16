@@ -22,13 +22,16 @@ namespace Anchor_Editor_Backend.Controllers
 
         private IXmlDeserializationService _xmlDeserializationService;
 
+        private IXmlSerializationService _xmlSerializationService;
+
         private IAnchorRepository _anchorRepository;
 
-        public XMLFilesController(IAnchorRepository anchorRepository, IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
+        public XMLFilesController(IXmlSerializationService xmlSerializationService, IAnchorRepository anchorRepository, IXmlRepository xmlRepository, IXmlDeserializationService xmlDeserializationService)
         {
             _anchorRepository = anchorRepository;
             _xmlRepository = xmlRepository;
             _xmlDeserializationService = xmlDeserializationService;
+            _xmlSerializationService = xmlSerializationService;
         }
 
         [HttpPost]
@@ -46,7 +49,11 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpGet]
         public IActionResult GetXmlFile()
         {
+            var originalXmlFile = _xmlRepository.OriginalXmlFile;
+            string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
+            IList<Anchor> anchorList = _anchorRepository.AnchorList;
 
+            _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile);
             return Ok("Default XML");
         }
 

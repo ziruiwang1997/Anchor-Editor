@@ -7,6 +7,6 @@ namespace Anchor_Editor_Backend.Services
 {
     public interface IXmlSerializationService
     {
-        XElement GetXmlFromAnchorsAndText(string plainText, IList<Anchor> anchorList);
+        XElement GetXmlFromAnchorsAndText(string plainText, IList<Anchor> anchorList, XElement originalXmlFile);
     }
 }
