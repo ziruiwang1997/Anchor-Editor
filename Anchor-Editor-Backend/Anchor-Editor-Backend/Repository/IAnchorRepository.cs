@@ -1,5 +1,6 @@
 ﻿using Anchor_Editor_Backend.Models;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Anchor_Editor_Backend.Repository
 {
@@ -16,5 +17,7 @@ namespace Anchor_Editor_Backend.Repository
         public void AddAnchorByTimestamp(string timestamp, int location);
 
         public void EditAnchor(string originalTimestamp, int originalLocation, string destinationTimestamp, int destinationLocation);
+
+        public Hashtable NestedAnchorsByLocation();
     }
 }

@@ -82,7 +82,7 @@ namespace Anchor_Editor_Backend.Services
                         if (counter + 6 < paragraph.Length && paragraph.Substring(counter, 7) == "<anchor")
                         {
                             anchorsPositionList.Add(positionPointer);
-                            Console.WriteLine($"Get Anchor at {positionPointer} + {originalText[positionPointer]}");
+                            //Console.WriteLine($"Get Anchor at {positionPointer} + {originalText[positionPointer]}");
                         }
                         continue;
                     }
@@ -96,13 +96,15 @@ namespace Anchor_Editor_Backend.Services
 
                         else if(counter - 3 >= 0 && paragraph.Substring(counter - 3, 4) == "</p>")
                         {
-                            positionPointer += 2;
+                            positionPointer += 1;
+                            positionPointer += 1;
                         }
                         continue;
                     }
                     
                     if (inXmlTag)
                     {
+                        //Console.WriteLine($"{positionPointer} + {paragraph[counter]}");
                         positionPointer++;
                     }
                 }
@@ -123,5 +125,3 @@ namespace Anchor_Editor_Backend.Services
         }
     }
 }
-//"<s>Howdy.</s><anchor time=\"1.62s\" /><s>Je m'appelle Éric Joanis.</s><s>Je suis programmeur <anchor time=\"3.81s\" /><anchor time=\"3.82s\" /> au sein de l'équipe des technologies pour les langues autochtones au CNRC.</s>"
-//"Howdy.\nJe m'appelle Éric Joanis.\nJe suis programmeur  au sein de l'équipe des technologies pour les langues autochtones au CNRC.\n\n\n

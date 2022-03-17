@@ -8,9 +8,11 @@ using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Xml;
 using System.Xml.Linq;
+using System.Collections;
 using Anchor_Editor_Backend.Repository;
 using Anchor_Editor_Backend.Services;
 using Anchor_Editor_Backend.Models;
+using System.Text;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -53,8 +55,11 @@ namespace Anchor_Editor_Backend.Controllers
             string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
             IList<Anchor> anchorList = _anchorRepository.AnchorList;
 
-            _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile);
-            return Ok("Default XML");
+            Hashtable nastedAnchors = _anchorRepository.NestedAnchorsByLocation();
+
+            string updatedXml = _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile, nastedAnchors);
+
+            return this.Content(updatedXml, "text/xml");
         }
 
         

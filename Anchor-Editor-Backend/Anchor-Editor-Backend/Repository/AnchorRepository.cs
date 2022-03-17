@@ -1,12 +1,33 @@
 ﻿using Anchor_Editor_Backend.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Collections;
 
 namespace Anchor_Editor_Backend.Repository
 {
     public class AnchorRepository : IAnchorRepository
     {
         public IList<Anchor> AnchorList { get; set; }
+
+        public Hashtable NestedAnchorsByLocation ()
+        {
+            Hashtable nestedAnchors = new Hashtable();
+
+            foreach(Anchor anchor in AnchorList)
+            {
+                if (nestedAnchors[anchor.Location] == null)
+                {
+                    nestedAnchors[anchor.Location] = anchor.ToString();
+                }
+                else
+                {
+                    nestedAnchors[anchor.Location] += anchor.ToString();
+                }
+            }
+
+            return nestedAnchors;
+        }
 
         public Anchor GetAnchorByTimestamp(string timestamp)
         {

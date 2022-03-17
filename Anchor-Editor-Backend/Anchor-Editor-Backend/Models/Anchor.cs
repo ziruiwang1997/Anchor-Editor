@@ -10,5 +10,10 @@
             Timestamp = timestamp;
             Location = location;
         }
+
+        public override string ToString()
+        {
+            return $"<anchor time=\"{Timestamp}\" />";
+        }
     }
 }
