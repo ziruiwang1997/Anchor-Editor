@@ -15,6 +15,28 @@ namespace Anchor_Editor_Backend.Services
 {
     public class XmlDeserializationService : IXmlDeserializationService
     {
+        public string TrimAnchorsOfXmlString(string originalXmlAsString, IList<Anchor> anchorList)
+        {
+            int count = 0;
+            while (count < originalXmlAsString.Length)
+            {
+                if (originalXmlAsString[count] == '<')
+                {
+                    foreach (var anchor in anchorList)
+                    {
+                        string anchorString = anchor.ToString();
+                        if (count + anchorString.Length < originalXmlAsString.Length && originalXmlAsString.Substring(count, anchorString.Length) == anchorString)
+                        {
+                            originalXmlAsString = originalXmlAsString.Remove(count, anchorString.Length);
+                        }
+                    }
+                }
+
+                count++;
+            }
+            return originalXmlAsString;
+        }
+
         public string GetPlainTextAsStringFromXml(XElement xmlFile)
         {
             string plainText = "";

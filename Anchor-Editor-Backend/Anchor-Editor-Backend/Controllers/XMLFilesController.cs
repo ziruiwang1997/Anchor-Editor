@@ -39,11 +39,16 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {
-            _xmlRepository.OriginalXmlFile = request;
-
-            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(_xmlRepository.OriginalXmlFile);
-
+            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(request);
             _anchorRepository.AnchorList = anchorList;
+
+
+
+            string trimmedXmlString = _xmlDeserializationService.TrimAnchorsOfXmlString(request.ToString(), anchorList);
+
+            XElement xmlTree = XElement.Parse(trimmedXmlString);
+
+            _xmlRepository.uploadXMLFile(xmlTree);
 
             return Ok("XML Uploaded");
         }

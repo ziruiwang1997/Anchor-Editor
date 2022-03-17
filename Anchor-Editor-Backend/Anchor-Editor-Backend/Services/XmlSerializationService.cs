@@ -17,9 +17,7 @@ namespace Anchor_Editor_Backend.Services
 
             XmlNodeList paragraphList = originalXmlDocument.DocumentElement.GetElementsByTagName("body");
 
-            string paragraphString = paragraphList[0].InnerXml;
-
-            var trimmedXmlAsString = TrimAnchorsOfXmlString(paragraphString, anchorList);
+            string trimmedXmlAsString = paragraphList[0].InnerXml;
             
             string updatedBoduXmlAsString = InstertAnchors(trimmedXmlAsString, nastedAnchors);
 
@@ -124,7 +122,7 @@ namespace Anchor_Editor_Backend.Services
             return paragraph;
         }
 
-        private string TrimAnchorsOfXmlString(string originalXmlAsString, IList<Anchor> anchorList)
+/*        private string TrimAnchorsOfXmlString(string originalXmlAsString, IList<Anchor> anchorList)
         {
             int count = 0;
             while (count < originalXmlAsString.Length)
@@ -144,7 +142,7 @@ namespace Anchor_Editor_Backend.Services
                 count++;
             }
             return originalXmlAsString;
-        }
+        }*/
     }
 
    
