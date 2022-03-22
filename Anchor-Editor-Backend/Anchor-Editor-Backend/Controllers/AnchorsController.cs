@@ -65,7 +65,7 @@ namespace Anchor_Editor_Backend.Controllers
         public IActionResult EditAnchor([FromQuery] string originalTimestamp, [FromQuery] int originalLocation, [FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {
             _anchorRepository.EditAnchor(originalTimestamp, originalLocation, destinationTimestamp, destinationLocation);
-            return Ok($"Anchor updated to timestamp = {destinationTimestamp}, location = {originalLocation}");
+            return Ok($"Anchor updated to timestamp = {destinationTimestamp}, location = {destinationLocation}");
         }
     }
 }
