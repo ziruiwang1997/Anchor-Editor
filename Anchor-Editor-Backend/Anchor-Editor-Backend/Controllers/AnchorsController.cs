@@ -55,10 +55,10 @@ namespace Anchor_Editor_Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAnchorByTimestamp([FromQuery] string timestamp, [FromQuery] int location)
+        public IActionResult AddAnchorByTimestamp([FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {
-            _anchorRepository.AddAnchorByTimestamp(timestamp, location);
-            return Ok($"Anchor at timestamp = {timestamp}, location = {location} Added");
+            _anchorRepository.AddAnchorByTimestamp(destinationTimestamp, destinationLocation);
+            return Ok($"Anchor at timestamp = {destinationTimestamp}, location = {destinationLocation} Added");
         }
 
         [HttpPut]

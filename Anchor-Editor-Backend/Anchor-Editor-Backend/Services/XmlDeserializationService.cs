@@ -85,7 +85,7 @@ namespace Anchor_Editor_Backend.Services
                 anchorsTimeList.Add(anchorTime);
             }
 
-            XmlNodeList paragraphList = originalXmlDocument.DocumentElement.GetElementsByTagName("body");
+            XmlNodeList paragraphList = originalXmlDocument.DocumentElement.GetElementsByTagName("text");
 
             int positionPointer = 0;
 
