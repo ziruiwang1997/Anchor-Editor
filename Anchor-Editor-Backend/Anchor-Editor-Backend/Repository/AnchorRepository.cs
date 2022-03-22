@@ -26,6 +26,8 @@ namespace Anchor_Editor_Backend.Repository
                 }
             }
 
+
+
             return nestedAnchors;
         }
 
@@ -52,6 +54,9 @@ namespace Anchor_Editor_Backend.Repository
         {
             Anchor anchor = new Anchor(timestamp, location);    
             AnchorList.Add(anchor);
+
+            IEnumerable<Anchor> sortedEnum = AnchorList.OrderBy(f => f.Timestamp);
+            AnchorList = sortedEnum.ToList();
         }
 
         public void EditAnchor(string originalTimestamp, int originalLocation, string destinationTimestamp, int destinationLocation)
@@ -59,6 +64,9 @@ namespace Anchor_Editor_Backend.Repository
             Anchor anchor = AnchorList.Where(x => x.Timestamp == originalTimestamp && x.Location == originalLocation).FirstOrDefault();
             anchor.Timestamp = destinationTimestamp;
             anchor.Location = destinationLocation;
+
+            IEnumerable<Anchor> sortedEnum = AnchorList.OrderBy(f => f.Timestamp);
+            AnchorList = sortedEnum.ToList();
         }
     }
 }

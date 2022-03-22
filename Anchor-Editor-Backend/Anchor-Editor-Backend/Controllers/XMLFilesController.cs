@@ -39,12 +39,16 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {
+            XmlDocument originalXmlDocument = new XmlDocument();
+            var originalXmlAsString = request.ToString();
+            originalXmlDocument.LoadXml(originalXmlAsString);
+
             IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(request);
             _anchorRepository.AnchorList = anchorList;
 
 
 
-            string trimmedXmlString = _xmlDeserializationService.TrimAnchorsOfXmlString(request.ToString(), anchorList);
+            string trimmedXmlString = _xmlDeserializationService.TrimAnchorsOfXmlString(originalXmlDocument.InnerXml, anchorList);
 
             XElement xmlTree = XElement.Parse(trimmedXmlString);
 
@@ -64,7 +68,9 @@ namespace Anchor_Editor_Backend.Controllers
 
             string updatedXml = _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile, nastedAnchors);
 
-            return this.Content(updatedXml, "text/xml");
+            //return this.Content(updatedXml, "text/xml");
+
+            return Ok(updatedXml);
         }
 
         
