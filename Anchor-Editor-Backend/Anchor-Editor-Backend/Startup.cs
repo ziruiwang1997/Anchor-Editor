@@ -42,6 +42,14 @@ namespace Anchor_Editor_Backend
             services.AddSingleton<IAnchorRepository, AnchorRepository>();
             services.AddTransient<IXmlDeserializationService, XmlDeserializationService>();
             services.AddTransient<IXmlSerializationService, XmlSerializationService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,10 +68,14 @@ namespace Anchor_Editor_Backend
 
             app.UseAuthorization();
 
+            app.UseCors(options => options.AllowAnyOrigin());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

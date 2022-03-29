@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Anchor_Editor_Backend.Repository;
 using Anchor_Editor_Backend.Services;
 using Anchor_Editor_Backend.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -28,6 +29,7 @@ namespace Anchor_Editor_Backend.Controllers
             _xmlDeserializationService = xmlDeserializationService;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetPlainTextAsString()
         {
