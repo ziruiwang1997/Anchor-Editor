@@ -29,13 +29,16 @@ namespace Anchor_Editor_Backend.Controllers
             _xmlDeserializationService = xmlDeserializationService;
         }
 
-        [EnableCors("AllowOrigin")]
+        //[EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetPlainTextAsString()
         {
             var originalXmlFile = _xmlRepository.OriginalXmlFile;
             string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
-            return Ok(plainText);
+            string str = plainText;
+            //JavaScriptSerializer j = new JavaScriptSerializer();
+            //object a = j.Deserialize(str, typeof(object));
+            return Ok(str);
         }
     }
 }
