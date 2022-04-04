@@ -48,7 +48,21 @@ namespace Anchor_Editor_Backend
                 options.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
-            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                                  builder =>
+                                  {
+                                      builder
+                                          .AllowAnyOrigin()
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod()
+                                          //.AllowCredentials()
+                                          ;
+                                  });
+            });
+
+
 
         }
 

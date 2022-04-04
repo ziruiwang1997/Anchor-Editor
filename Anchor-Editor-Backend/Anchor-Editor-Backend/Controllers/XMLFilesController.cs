@@ -13,6 +13,7 @@ using Anchor_Editor_Backend.Repository;
 using Anchor_Editor_Backend.Services;
 using Anchor_Editor_Backend.Models;
 using System.Text;
+using Microsoft.AspNetCore.Cors;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -36,6 +37,7 @@ namespace Anchor_Editor_Backend.Controllers
             _xmlSerializationService = xmlSerializationService;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {

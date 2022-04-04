@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zirui\\Desktop\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj": {}
+    "C:\\Users\\zirui\\Desktop\\TEST\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zirui\\Desktop\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj": {
+    "C:\\Users\\zirui\\Desktop\\TEST\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zirui\\Desktop\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\zirui\\Desktop\\TEST\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj",
         "projectName": "Anchor-Editor-Backend",
-        "projectPath": "C:\\Users\\zirui\\Desktop\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj",
+        "projectPath": "C:\\Users\\zirui\\Desktop\\TEST\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\Anchor-Editor-Backend.csproj",
         "packagesPath": "C:\\Users\\zirui\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zirui\\Desktop\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\obj\\",
+        "outputPath": "C:\\Users\\zirui\\Desktop\\TEST\\Anchor-Editor\\Anchor-Editor-Backend\\Anchor-Editor-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\zirui\\AppData\\Roaming\\NuGet\\NuGet.Config",
