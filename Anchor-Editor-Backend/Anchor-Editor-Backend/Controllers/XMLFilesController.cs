@@ -59,6 +59,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok("XML Uploaded");
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetXmlFile()
         {

@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Anchor_Editor_Backend.Services;
 using Anchor_Editor_Backend.Repository;
 using Anchor_Editor_Backend.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace Anchor_Editor_Backend.Controllers
 {
@@ -26,6 +27,7 @@ namespace Anchor_Editor_Backend.Controllers
             _xmlDeserializationService = xmlDeserializationService;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetAllAnchors()
         {
@@ -33,6 +35,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok(_anchorRepository.AnchorList);
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet("{timestamp}")]
         public IActionResult GetAnchorsByTimestamp(string timestamp)
         {
@@ -40,6 +43,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok(anchor);
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet("{location:int}")]
         public IActionResult GetAnchorsByTimestamp(int location)
         {
@@ -47,6 +51,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok(anchors);
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpDelete("{timestamp}")]
         public IActionResult DeleteAnchorByTimestamp(string timestamp)
         {
@@ -54,6 +59,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok($"Anchor at {timestamp} deleted");
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost]
         public IActionResult AddAnchorByTimestamp([FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {
@@ -61,6 +67,7 @@ namespace Anchor_Editor_Backend.Controllers
             return Ok($"Anchor at timestamp = {destinationTimestamp}, location = {destinationLocation} Added");
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPut]
         public IActionResult EditAnchor([FromQuery] string originalTimestamp, [FromQuery] int originalLocation, [FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {

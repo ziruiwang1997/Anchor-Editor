@@ -29,7 +29,7 @@ namespace Anchor_Editor_Backend.Controllers
             _xmlDeserializationService = xmlDeserializationService;
         }
 
-        //[EnableCors("AllowOrigin")]
+        [EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetPlainTextAsString()
         {
