@@ -45,7 +45,7 @@ namespace Anchor_Editor_Backend.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpGet("{location:int}")]
-        public IActionResult GetAnchorsByTimestamp(int location)
+        public IActionResult GetAnchorsByLocation(int location)
         {
             IList <Anchor> anchors = _anchorRepository.GetAnchorByLocation(location);
             return Ok(anchors);
@@ -56,7 +56,7 @@ namespace Anchor_Editor_Backend.Controllers
         public IActionResult DeleteAnchorByTimestamp(string timestamp)
         {
             _anchorRepository.DeleteAnchorByTimestamp(timestamp);
-            return Ok($"Anchor at {timestamp} deleted");
+            return Ok(_anchorRepository.AnchorList);
         }
 
         [EnableCors("AllowOrigin")]
@@ -64,7 +64,7 @@ namespace Anchor_Editor_Backend.Controllers
         public IActionResult AddAnchorByTimestamp([FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {
             _anchorRepository.AddAnchorByTimestamp(destinationTimestamp, destinationLocation);
-            return Ok($"Anchor at timestamp = {destinationTimestamp}, location = {destinationLocation} Added");
+            return Ok(_anchorRepository.AnchorList);
         }
 
         [EnableCors("AllowOrigin")]
@@ -72,7 +72,7 @@ namespace Anchor_Editor_Backend.Controllers
         public IActionResult EditAnchor([FromQuery] string originalTimestamp, [FromQuery] int originalLocation, [FromQuery] string destinationTimestamp, [FromQuery] int destinationLocation)
         {
             _anchorRepository.EditAnchor(originalTimestamp, originalLocation, destinationTimestamp, destinationLocation);
-            return Ok($"Anchor updated to timestamp = {destinationTimestamp}, location = {destinationLocation}");
+            return Ok(_anchorRepository.AnchorList);
         }
     }
 }
