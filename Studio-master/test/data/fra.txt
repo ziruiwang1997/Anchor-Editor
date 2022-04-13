@@ -1,9 +1,0 @@
-Ceci est une phrase en français. Ceci est une autre phrase.
-Et voici une deuxième ligne dans le même paragraphe.
-
-Un deuxième paragraphe précédé d'une ligne vide est ici. Avec deux phrases.
-
-
-Et voici une deuxième page.
-
-Qui contient elle aussi deux paragraphes.
