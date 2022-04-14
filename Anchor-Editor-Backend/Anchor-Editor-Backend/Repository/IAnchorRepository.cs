@@ -10,7 +10,7 @@ namespace Anchor_Editor_Backend.Repository
 
         public Anchor GetAnchorByTimestamp(string timestamp);
 
-        public IList<Anchor> GetAnchorByLocation(int location);
+        public IList<Anchor> GetAnchorsByLocation(int location);
 
         public void DeleteAnchorByTimestamp(string timestamp);
 

@@ -25,9 +25,6 @@ namespace Anchor_Editor_Backend.Repository
                     nestedAnchors[anchor.Location] += anchor.ToString();
                 }
             }
-
-
-
             return nestedAnchors;
         }
 
@@ -37,7 +34,7 @@ namespace Anchor_Editor_Backend.Repository
             return anchor;
         }
 
-        public IList<Anchor> GetAnchorByLocation(int location)
+        public IList<Anchor> GetAnchorsByLocation(int location)
         {
             IList<Anchor> anchor = AnchorList.Where(x => x.Location == location).ToList();
             return anchor;

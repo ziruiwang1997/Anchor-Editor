@@ -41,39 +41,52 @@ namespace Anchor_Editor_Backend.Controllers
         [HttpPost]
         public IActionResult PostXMLFile([FromBody] XElement request)
         {
-            XmlDocument originalXmlDocument = new XmlDocument();
-            var originalXmlAsString = request.ToString();
-            originalXmlDocument.LoadXml(originalXmlAsString);
+            try
+            {
+                XmlDocument originalXmlDocument = new XmlDocument();
+                var originalXmlAsString = request.ToString();
+                originalXmlDocument.LoadXml(originalXmlAsString);
 
-            IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(request);
-            _anchorRepository.AnchorList = anchorList;
+                IList<Anchor> anchorList = _xmlDeserializationService.GetAnchorsAsEnumerableFromXml(request);
+                _anchorRepository.AnchorList = anchorList;
 
 
 
-            string trimmedXmlString = _xmlDeserializationService.TrimAnchorsOfXmlString(originalXmlDocument.InnerXml, anchorList);
+                string trimmedXmlString = _xmlDeserializationService.TrimAnchorsOfXmlString(originalXmlDocument.InnerXml, anchorList);
 
-            XElement xmlTree = XElement.Parse(trimmedXmlString);
+                XElement xmlTree = XElement.Parse(trimmedXmlString);
 
-            _xmlRepository.uploadXMLFile(xmlTree);
+                _xmlRepository.uploadXMLFile(xmlTree);
 
-            return Ok("XML Uploaded");
+                return Ok("XML Uploaded");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [EnableCors("AllowOrigin")]
         [HttpGet]
         public IActionResult GetXmlFile()
         {
-            var originalXmlFile = _xmlRepository.OriginalXmlFile;
-            string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
-            IList<Anchor> anchorList = _anchorRepository.AnchorList;
+            try
+            {
+                var originalXmlFile = _xmlRepository.OriginalXmlFile;
+                string plainText = _xmlDeserializationService.GetPlainTextAsStringFromXml(originalXmlFile);
+                IList<Anchor> anchorList = _anchorRepository.AnchorList;
 
-            Hashtable nastedAnchors = _anchorRepository.NestedAnchorsByLocation();
+                Hashtable nastedAnchors = _anchorRepository.NestedAnchorsByLocation();
 
-            string updatedXml = _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile, nastedAnchors);
+                string updatedXml = _xmlSerializationService.GetXmlFromAnchorsAndText(plainText, anchorList, originalXmlFile, nastedAnchors);
 
-            //return this.Content(updatedXml, "text/xml");
-
-            return Ok(updatedXml);
+                return Ok(updatedXml);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         

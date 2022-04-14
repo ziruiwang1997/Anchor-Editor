@@ -1,4 +1,6 @@
-﻿namespace Anchor_Editor_Backend.Models
+﻿using System;
+
+namespace Anchor_Editor_Backend.Models
 {
     public class Anchor
     {
@@ -14,6 +16,11 @@
         public override string ToString()
         {
             return $"<anchor time=\"{Timestamp}\" />";
+        }
+
+        public void Returns(Anchor anchor1)
+        {
+            throw new NotImplementedException();
         }
     }
 }
